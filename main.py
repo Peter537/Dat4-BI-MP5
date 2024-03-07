@@ -6,7 +6,6 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 import pandas as pd
-import numpy as np
 from recommendation import get_description_recommendations, get_recommendations, get_title_recommendations
 
 st.set_page_config(
@@ -76,7 +75,7 @@ with st.expander("Choose a column"):
     columnSelect = st.selectbox("Select a column:", df.columns, index=None, placeholder='Choose a column')   
 
     if columnSelect != None:
-        inputSelect = st.text_input("Enter input:", value='', max_chars=None, key=None, type='default', help=None, placeholder='Enter input')
+        inputSelect = st.selectbox("Select input:", df[columnSelect].values, index=None, placeholder='Choose an input')
         submit2 = st.button('Submit', key="submit2")
         if submit2:
             if inputSelect != None:
