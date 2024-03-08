@@ -31,11 +31,15 @@ banner = """
 
 try:
     df = pd.read_csv('./data/tmdb_5000_movies.csv')
+    df = df.dropna()
+    df = df.drop(['id'], axis=1)
+    st.session_state.df = df
 except:
     st.error("No data found")
 
 st.markdown(banner, unsafe_allow_html=True)
 
+st.write("This is a movie recommender system. You can select a title, description or a column and input to get recommendations based on similarity!")
 with st.expander("Select a title"):
     with st.form('titleForm'):
         titleSelect = st.selectbox("Select a title:", df['title'].values, index=None, placeholder='Choose a title')                
